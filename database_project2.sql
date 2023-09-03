@@ -1,18 +1,18 @@
-CREATE DATABASE Iho;
-USE Iho;
+sysCREATE DATABASE g0su;
+USE g0su;
 
 -- member
 CREATE TABLE MEMBER(
-id VARCHAR(16) NOT NULL,   
-pw VARCHAR(300) NOT NULL,   
-NAME VARCHAR(100) NOT NULL,   
-email VARCHAR(100) NOT NULL,   
-tel VARCHAR(13),   
-birth DATE, 
-address VARCHAR(300), 
-postcode VARCHAR(10),
-regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-POINT INT DEFAULT 0,  
+id VARCHAR(16) NOT NULL,   -- (아이디)
+pw VARCHAR(300) NOT NULL,   -- (비밀번호)
+NAME VARCHAR(100) NOT NULL,   -- (이름)
+email VARCHAR(100) NOT NULL,   -- (이메일)
+tel VARCHAR(13),   -- (전화번호)
+birth DATE, -- 생년월일
+address VARCHAR(300), -- 주소team42
+postcode VARCHAR(10),g0sunotice
+regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   -- (가입일)
+POINT INT DEFAULT 0,   -- (포인트)
 grade VARCHAR(4) DEFAULT 'F',
 state BOOLEAN DEFAULT TRUE,
 PRIMARY KEY (id)
@@ -23,18 +23,25 @@ PRIMARY KEY (id)
 
 -- qna
 CREATE TABLE qna(
-	qno INT PRIMARY KEY AUTO_INCREMENT,  
-	title VARCHAR(100) NOT NULL,   
-	content VARCHAR(1000) NOT NULL,   
-	author VARCHAR(16),   
-	regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), 
-	visited INT DEFAULT 0,  
-	lev INT DEFAULT 0,
-	par INT,	
-	secret BOOLEAN DEFAULT 0,
+	qno INT PRIMARY KEY AUTO_INCREMENT,   -- (문의번호) 자동발생
+	title VARCHAR(100) NOT NULL,   -- (문의 제목)
+	content VARCHAR(1000) NOT NULL,   -- (문의 내용)
+	author VARCHAR(16),   -- (문의 작성자)
+	regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),   -- (문의 등록일)
+	visited INT DEFAULT 0,   -- (조회수)
+	lev INT DEFAULT 0, -- 질문(0), 답변(1)
+	par INT,	-- 부모 글번호 -> 질문(자신 레코드의 qno), 답변(질문의 글번호)
+	secret BOOLEAN DEFAULT 0,	-- 비밀글 유무
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE CASCADE
 );
 
+-- faq
+CREATE TABLE faq(
+	fno INT PRIMARY KEY AUTO_INCREMENT,   -- (문의번호) 자동발생
+	title VARCHAR(100) NOT NULL,   -- (문의 제목)
+	content VARCHAR(1000) NOT NULL,   -- (문의 내용)
+	regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- (문의 등록일)
+);
 
 -- 공지 테이블
 create table notice(
@@ -55,19 +62,18 @@ create table category(
 	categoryName varchar(100) not NULL
 );
 
-
 -- 상품 테이블 생성
 create table product(
 	proNo INT PRIMARY KEY AUTO_INCREMENT,
 	categoryId VARCHAR(4) NOT NULL,
-	procategory VARCHAR(100),
-	price INT DEFAULT 0, 
+	procategory VARCHAR(100), -- 상품번호와 카테고리 아이디 결합
+	price INT DEFAULT 0, -- 상품 가격
 	title VARCHAR(100) NOT NULL,
-	author VARCHAR(100), 
-	content VARCHAR(2000), 
-	img VARCHAR(5000) default 0, 
+	author VARCHAR(100), -- 저자
+	content VARCHAR(2000), -- 상품 설명
+	img VARCHAR(5000) default 0, -- 상품 썸네일
 	regdate timestamp default CURRENT_TIMESTAMP(),
-   video VARCHAR(5000) default 0 
+    video VARCHAR(5000) default 0 -- 상품 썸네일      //0828 추가 황교진 - product와 book 테이블을 하나로 합치기 위함
 );
 -- ALTER table product CHANGE thumbnail img VARCHAR(5000) DEFAULT 0;
 -- ALTER TABLE product ADD video VARCHAR(5000) DEFAULT 0;
