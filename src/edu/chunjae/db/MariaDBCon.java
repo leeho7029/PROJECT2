@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 public class MariaDBCon extends DBC {
   final String DRIVER = "org.mariadb.jdbc.Driver";
-  final String PORT = "3308/";
+  final String PORT = "3306/";
   final String URL = "jdbc:mariadb://"+super.getDNS()+PORT+super.getDB();
 
   public MariaDBCon() {

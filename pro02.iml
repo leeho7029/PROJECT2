@@ -34,6 +34,6 @@
     <orderEntry type="library" name="crypto" level="project" />
     <orderEntry type="library" name="json-lib-2.0-jdk15" level="project" />
     <orderEntry type="library" name="google.code.gson" level="project" />
-    <orderEntry type="library" name="cos" level="project" />
+    <orderEntry type="library" name="cos-05Nov2002" level="project" />
   </component>
 </module>

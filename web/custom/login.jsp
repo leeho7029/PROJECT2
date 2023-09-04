@@ -37,7 +37,7 @@
                     <tr>
                         <td>
                             <input type="submit" value="로그인" class="btn btn-primary">
-                            <a href="" class="btn btn-secondary">회원가입</a>
+                            <a href="${path }/custom/term.jsp" class="btn btn-secondary">회원가입</a>
                         </td>
                     </tr>
                     </tbody>
